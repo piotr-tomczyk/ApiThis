@@ -25,8 +25,6 @@ export class ConfigServiceService {
     return response
   }
   postMovie(movie: Movie){
-    console.log(JSON.stringify(movie));
-    console.log(movie);
     return this.http.post<any>('http://ptsv2.com/t/p6bt7-1649868318/post', JSON.stringify(movie));
   }
 }

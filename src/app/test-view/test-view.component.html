@@ -1,10 +1,25 @@
-<div ngClass="flex">
+<form [formGroup]="searchBar" (ngSubmit)="onSubmit()">
+    <div>
+        <label for="username">Username: </label>
+        <input type="text" formControlName="movieName">
+        <div *ngIf="movieName?.errors?.['required']" ngClass="error">
+            This field is required.
+        </div>
+    </div>
+    <button type="submit">Search</button>
+</form>
+
+<div ngClass="flex" *ngIf="this.movieRequested">
     <div ngClass="column">
         <h3>TITLE</h3>
         <div>{{movie.title}}</div>
-        <h3>YEAR</h3>
+        <h3>DESCRIPTION</h3>
         <div>{{movie.description}}</div>
         <h3>POSTER</h3>
         <img src={{movie.image}} height="100px">
     </div>
 </div>
+<div ngClass="error" *ngIf="this.requestError">
+    This movie doesn't exist in the imdb database.
+</div>
+
