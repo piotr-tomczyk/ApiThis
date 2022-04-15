@@ -1,0 +1,12 @@
+{
+    "http://ptsv2.com/t/svy6i-1649834677/post": {
+        "target": "http://localhost:4200",
+        "secure": false,
+        "logLevel": "debug"
+    },
+    "https://imdb-api.com/en/API/SearchMovie/pk_t5tlgmmyq8jagcba4/*":{
+        "target": "http://localhost:4200",
+        "secure": false,
+        "logLevel": "debug"
+    }
+}

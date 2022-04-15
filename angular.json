@@ -76,6 +76,10 @@
             },
             "development": {
               "browserTarget": "ApiThis:build:development"
+            },
+            "options": {
+              "browserTarget": "http://localhost:4200/",
+              "proxyConfig": "src/app/assets/proxy.conf.json"
             }
           },
           "defaultConfiguration": "development"
