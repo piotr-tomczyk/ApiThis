@@ -1,7 +1,16 @@
+$color_1: #FFF5C1;
+$color_2: #FAA628;
+$color_3: #EB9A69;
+$color_4: #8D5555;
 .column{
     display:flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     gap:2em;
+}
+.content{
+    background-color: darken($color_3, 15%);
+    border-radius: 5px;
+    padding: 0.5em;
 }

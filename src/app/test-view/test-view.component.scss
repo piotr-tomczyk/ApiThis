@@ -1,3 +1,24 @@
+$color_1: #FFF5C1;
+$color_2: #FAA628;
+$color_3: #EB9A69;
+$color_4: #8D5555;
+
+button{
+    border-style: none;
+    background-color: $color_4;
+    color:$color_1;
+    padding: 0.5em;
+    border-radius: 8px;
+}
+input{
+    border-style: none;
+    padding: 0.5em;
+    background-color: lighten($color_2, 5%);
+    border-radius: 8px;
+}
+input:focus{
+    outline: none;
+}
 .flex{
     display: grid;
     grid-template-columns: repeat(4, 1fr);
@@ -23,6 +44,11 @@
     align-items: center;
     flex-wrap: wrap;
     margin-top:2em;
+    background-color: lighten($color_2, 4%);
+    padding:1em;
+    border-radius: 5px;
+    min-height: 60vh;
+    max-height: 100vh;
 }
 .searchBar{
     display:flex;
