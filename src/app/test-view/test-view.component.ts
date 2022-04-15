@@ -10,6 +10,7 @@ import {Movie, ConfigServiceService} from '../config-service.service';
 export class TestViewComponent implements OnInit {
   movieRequested = false;
   requestError = false;
+  requiredError = false;
   movie = new Movie("", "", "",
   "", "");
   searchBar!:FormGroup;
@@ -21,26 +22,38 @@ export class TestViewComponent implements OnInit {
       movieName: new FormControl('', [Validators.required])
     })
   }
-  async onSubmit(){
-    let movieName = this.movieName?.value;
-    let response = await this.Config.getMovies(movieName);
-    console.log(response);
-    if(response.Error){
-      this.requestError = true;
-      this.movieRequested = false;
-      return;
+  checkError(){
+    if(this.movieName?.errors?.['required']){
+     this.requiredError = true;
+     return false;
     }
-    this.requestError = false;
-    this.movieRequested = true;
-    this.movie = new Movie(response.imdbID, response.imdbRating, response.Poster,
-      response.Title, response.Plot);
-    this.Config.postMovie(this.movie).subscribe(
-      response => {
-        if(response.status != 200){
-          console.log('POST call in error', response);
-        }
-        console.log("weee");
-      });
+    else{
+      this.requiredError = false;
+      return true;
+    }
+  }
+  async onSubmit(){
+    if(this.checkError()){
+      let movieName = this.movieName?.value;
+      let response = await this.Config.getMovies(movieName);
+      console.log(response);
+      if(response.Error){
+        this.requestError = true;
+        this.movieRequested = false;
+        return;
+      }
+      this.requestError = false;
+      this.movieRequested = true;
+      this.movie = new Movie(response.imdbID, response.imdbRating, response.Poster,
+        response.Title, response.Plot);
+      this.Config.postMovie(this.movie).subscribe(
+        response => {
+          if(response.status != 200){
+            console.log('POST call in error', response);
+          }
+          console.log("weee");
+        });
+    }
   }
   get movieName() {return this.searchBar.get('movieName');}
 }

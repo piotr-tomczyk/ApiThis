@@ -1,14 +1,14 @@
-<form [formGroup]="searchBar" (ngSubmit)="onSubmit()">
-    <div>
-        <label for="username">Username: </label>
-        <input type="text" formControlName="movieName">
-        <div *ngIf="movieName?.errors?.['required']" ngClass="error">
-            This field is required.
-        </div>
+<form [formGroup]="searchBar" (ngSubmit)="onSubmit()" ngClass="searchBar">
+    <div ngClass="column">
+        <label for="username">Title: </label>
+        <input type="text" formControlName="movieName" (input)="requiredError = false;">
+        <button type="submit">Search</button>
     </div>
-    <button type="submit">Search</button>
+    <div *ngIf="requiredError" ngClass="error">
+        Movie title cannot be empty.
+    </div>
+    <div ngClass="error" *ngIf="this.requestError && !requiredError">
+        This movie doesn't exist in the imdb database.
+    </div>
 </form>
-<app-movie-view [movie]="this.movie" *ngIf="this.movieRequested"></app-movie-view>
-<div ngClass="error" *ngIf="this.requestError">
-    This movie doesn't exist in the imdb database.
-</div>
+<app-movie-view [movie]="this.movie" *ngIf="this.movieRequested" ngClass="movie"></app-movie-view>
